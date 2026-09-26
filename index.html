@@ -1,0 +1,108 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Multi-Robot Task Negotiation Engine</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="app">
+
+    <header class="topbar">
+      <div class="brand">
+        <span class="brand-mark" aria-hidden="true">&#9670;</span>
+        <div>
+          <h1>Multi-Robot Task Negotiation Engine</h1>
+          <p class="brand-sub">Decentralized fleet coordination for high-density warehouses</p>
+        </div>
+      </div>
+      <div class="conn-status" id="connStatus">
+        <span class="dot" id="connDot"></span>
+        <span id="connLabel">connecting</span>
+      </div>
+    </header>
+
+    <main class="layout">
+
+      <section class="viewport">
+        <canvas id="floorCanvas"></canvas>
+
+        <div class="viewport-overlay top-left">
+          <div class="step-counter">tick <span id="stepCount">0</span></div>
+        </div>
+
+        <div class="viewport-overlay bottom-left legend">
+          <span><i class="swatch idle"></i>idle</span>
+          <span><i class="swatch pickup"></i>to pickup</span>
+          <span><i class="swatch drop"></i>to drop</span>
+          <span><i class="swatch charge"></i>charging</span>
+          <span><i class="swatch comm"></i>comm loss</span>
+          <span><i class="swatch failed"></i>failed</span>
+        </div>
+      </section>
+
+      <aside class="sidebar">
+
+        <div class="panel">
+          <h2>Simulation control</h2>
+          <div class="button-row">
+            <button id="btnStart" class="btn primary">Start</button>
+            <button id="btnStop" class="btn">Pause</button>
+            <button id="btnStep" class="btn">Step once</button>
+          </div>
+
+          <details class="config">
+            <summary>Fleet configuration</summary>
+            <div class="config-grid">
+              <label>Robots
+                <input id="cfgRobots" type="number" min="10" max="2000" value="200">
+              </label>
+              <label>Tasks
+                <input id="cfgTasks" type="number" min="10" max="1000" value="100">
+              </label>
+              <label>Grid rows
+                <input id="cfgRows" type="number" min="10" max="120" value="30">
+              </label>
+              <label>Grid cols
+                <input id="cfgCols" type="number" min="10" max="160" value="40">
+              </label>
+              <label>Charging stations
+                <input id="cfgStations" type="number" min="2" max="40" value="6">
+              </label>
+            </div>
+            <button id="btnReset" class="btn full">Apply and reset</button>
+          </details>
+        </div>
+
+        <div class="panel">
+          <h2>Resilience testing</h2>
+          <p class="hint">
+            Inject the failures the brief asks for — a robot dying mid-mission,
+            or losing its link to the fleet — and watch the rest route around
+            it without stopping.
+          </p>
+          <div class="button-row">
+            <button id="btnFail" class="btn danger">Fail random robot</button>
+            <button id="btnComm" class="btn warn">Cut comms (random robot)</button>
+          </div>
+        </div>
+
+        <div class="panel stats-panel">
+          <h2>Fleet telemetry</h2>
+          <div class="stat-grid" id="statGrid"></div>
+        </div>
+
+        <div class="panel feed-panel">
+          <h2>Negotiation activity</h2>
+          <ul class="feed" id="feedList"></ul>
+        </div>
+
+      </aside>
+
+    </main>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
