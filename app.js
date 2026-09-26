@@ -2,8 +2,7 @@
   "use strict";
 
   // Change this if the backend runs somewhere other than localhost:8000.
-  const API_BASE = window.HACKFUSION_API_BASE || "http://localhost:8000";
-  const WS_URL = API_BASE.replace(/^http/, "ws") + "/ws";
+const API_BASE = window.HACKFUSION_API_BASE || "https://barbie-heimer-project.onrender.com";  const WS_URL = API_BASE.replace(/^http/, "ws") + "/ws";
 
   const canvas = document.getElementById("floorCanvas");
   const ctx = canvas.getContext("2d");
